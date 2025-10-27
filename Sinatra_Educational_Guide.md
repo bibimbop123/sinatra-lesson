@@ -81,7 +81,7 @@ rails server
 
 > **Try This:** Change the string to `"Hi, [Your Name]!"` and reload the page.
 
-###require vs require_relative
+### require vs require_relative
 
 require loads libraries or gems that Ruby knows about (either built-in or installed).
 
