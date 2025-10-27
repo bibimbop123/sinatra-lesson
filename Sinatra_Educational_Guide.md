@@ -81,6 +81,12 @@ rails server
 
 > **Try This:** Change the string to `"Hi, [Your Name]!"` and reload the page.
 
+###require vs require_relative
+
+require loads libraries or gems that Ruby knows about (either built-in or installed).
+
+require_relative loads your own files, using a relative path (like "./my_file.rb").
+
 ---
 
 ### 🧩 2. Sinatra Philosophy & Structure
