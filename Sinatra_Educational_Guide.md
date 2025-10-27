@@ -30,6 +30,55 @@ Visit 👉 `http://localhost:4567`
 
 🧠 **Concept:** Sinatra runs on **Rack**, which is the interface between your Ruby code and the web server. Your `get '/'` block is registered as a **route handler** that Rack calls when a matching request comes in.
 
+
+# Rack vs Puma
+
+## 1. Rack
+- **What it is:** A **Ruby interface** between web servers and Ruby web applications (Rails, Sinatra, etc.).
+- **Role:** Standardizes how HTTP requests and responses are handled in Ruby.
+- **Not a server itself:** Rack doesn’t serve requests; it defines a **callable interface**.
+- **Key concept:** Any Ruby web app implementing `call(env)` can work with any Rack-compatible server.
+
+**Example: Minimal Rack app**
+```ruby
+app = Proc.new do |env|
+  ['200', {'Content-Type' => 'text/html'}, ['Hello world']]
+end
+
+require 'rack'
+Rack::Handler::WEBrick.run app
+```
+
+---
+
+## 2. Puma
+- **What it is:** A **web server** for Ruby apps.
+- **Role:** Handles **HTTP requests from clients**, manages threads, and passes requests to your Rack-compatible app.
+- **Key features:**
+  - Threaded → handles many requests concurrently.
+  - High performance → great for Rails production apps.
+  - Rack-compatible → can run Rails, Sinatra, and other Rack-based apps.
+
+**Example (Rails default server):**
+```bash
+rails server
+# Rails defaults to Puma
+```
+
+---
+
+## 3. Analogy
+- **Rack = language rules** (like “English grammar”)
+- **Puma = speaker/actor** that uses those rules to deliver messages (requests/responses) to the audience (browser/client).
+
+---
+
+## 4. Summary
+| Component | Role | Notes |
+|-----------|------|-------|
+| Rack      | Interface/standard | Defines `call(env)` for Ruby web apps |
+| Puma      | Web server          | Handles HTTP, speaks Rack, threaded & high performance |
+
 > **Try This:** Change the string to `"Hi, [Your Name]!"` and reload the page.
 
 ---
